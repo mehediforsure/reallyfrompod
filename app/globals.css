@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 
+/* ── Design tokens ── */
 :root {
   --navy: #1A1F2E;
   --navy-light: #252B3E;
@@ -14,12 +15,7 @@
   --muted: #8A8F9E;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* ── Base ── */
 html {
   scroll-behavior: smooth;
 }
@@ -29,13 +25,52 @@ body {
   background-color: var(--warm-white);
   color: var(--navy);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* ── Typography ── */
 .font-display {
   font-family: 'Cormorant Garant', serif;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar { width: 6px; }
+/* ── Focus styles ── */
+:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 3px;
+}
+
+/* ── Film grain texture (signature element) ── */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: overlay;
+  opacity: 0.6;
+}
+
+/* ── Section divider rule ── */
+.rule-sage {
+  border: none;
+  border-top: 1px solid var(--sage);
+  opacity: 0.25;
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--linen); }
-::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--sage); }
+::-webkit-scrollbar-thumb:hover { background: var(--navy); }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}

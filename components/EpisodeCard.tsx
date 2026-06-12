@@ -1,4 +1,4 @@
-interface Episode {
+export interface Episode {
   id: number;
   slug: string;
   title: string;
@@ -15,51 +15,71 @@ export default function EpisodeCard({ episode }: { episode: Episode }) {
       href={episode.originalUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block bg-white rounded-lg overflow-hidden border border-[#E8E0D4] hover:border-[#7B9E8B]/40 hover:shadow-lg transition-all duration-300"
+      className="group flex flex-col bg-white overflow-hidden border border-[#E8E0D4] hover:border-[#7B9E8B]/50 hover:shadow-xl transition-all duration-300"
+      style={{ borderRadius: 0 }}
     >
       {/* Image */}
-      <div className="aspect-[4/3] overflow-hidden bg-[#E8E0D4]">
+      <div className="aspect-[16/10] overflow-hidden bg-[#E8E0D4] flex-shrink-0">
         <img
           src={episode.image}
           alt={episode.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
           loading="lazy"
+          decoding="async"
         />
       </div>
 
       {/* Content */}
-      <div className="p-6">
-        {/* Episode number + date */}
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-xs font-medium text-[#7B9E8B] uppercase tracking-widest">
-            {episode.id === 0 ? "Trailer" : `Ep. ${episode.id}`}
+      <div className="p-6 flex flex-col flex-1">
+        {/* Episode label + date */}
+        <div className="flex items-center justify-between mb-4">
+          <span
+            className="text-[0.6rem] font-bold text-[#7B9E8B] uppercase tracking-[0.18em]"
+          >
+            {episode.id === 0 ? "Trailer" : `Episode ${episode.id}`}
           </span>
-          <span className="text-xs text-[#8A8F9E]">{episode.date}</span>
+          <time className="text-[0.65rem] text-[#8A8F9E] tabular-nums">{episode.date}</time>
         </div>
 
         {/* Title */}
         <h3
-          className="font-display text-xl font-semibold text-[#1A1F2E] mb-3 leading-snug group-hover:text-[#7B9E8B] transition-colors"
+          className="font-display text-[1.25rem] font-semibold text-[#1A1F2E] mb-3 leading-[1.25] group-hover:text-[#7B9E8B] transition-colors duration-200"
           style={{ letterSpacing: "0.01em" }}
         >
           {episode.title}
         </h3>
 
+        {/* Rule */}
+        <div className="w-8 h-px bg-[#7B9E8B] mb-3 opacity-40 group-hover:opacity-80 group-hover:w-12 transition-all duration-300" />
+
         {/* Description */}
-        <p className="text-sm text-[#52576A] leading-relaxed line-clamp-3">
+        <p
+          className="text-[0.82rem] text-[#52576A] leading-[1.65] flex-1"
+          style={{
+            display: "-webkit-box",
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
           {episode.description}
         </p>
 
-        {/* Tags */}
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {episode.tags.slice(0, 3).map((tag) => (
-            <span
-              key={tag}
-              className="text-xs px-2 py-0.5 bg-[#F0EDE6] text-[#8A8F9E] rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
+        {/* Footer row */}
+        <div className="mt-5 flex items-center justify-between">
+          <div className="flex flex-wrap gap-1.5">
+            {episode.tags.slice(0, 2).map((tag) => (
+              <span
+                key={tag}
+                className="text-[0.6rem] font-medium px-2 py-0.5 bg-[#F0EDE6] text-[#8A8F9E] uppercase tracking-wider"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <span className="text-[#7B9E8B] text-xs group-hover:translate-x-1 transition-transform duration-200">
+            →
+          </span>
         </div>
       </div>
     </a>
