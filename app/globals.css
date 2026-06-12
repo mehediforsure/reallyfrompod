@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --navy: #1A1F2E;
+  --navy-light: #252B3E;
+  --linen: #F0EDE6;
+  --cream: #E8E0D4;
+  --sage: #7B9E8B;
+  --sage-light: #9DB8A8;
+  --terracotta: #C9956A;
+  --warm-white: #FAF8F4;
+  --muted: #8A8F9E;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--warm-white);
+  color: var(--navy);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: 'Cormorant Garant', serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--linen); }
+::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 3px; }
